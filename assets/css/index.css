@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --blue : #084cdf;
+    --grey : rgb(244, 244, 244);
+}
+
+.wrapper {
+    width: 80%;
+    margin: 0 auto;
+}
+
+nav {
+    background-color: var(--grey);
+}
+
+nav .wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+nav .left--part {
+    display: flex;
+    gap: 35px;
+    align-items: center;
+}
+
+nav .right--part input {
+    padding: 7px;
+    outline: none;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+nav img {
+    width: 90px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav .left--part ul li{
+    font-size: 14px;
+}
+
+nav ul .name{
+    position: relative;
+}
+
+.nav--options {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    background-color: white;
+    padding: 30px 80px 30px 15px;
+    margin-top: 18px;
+    border: 1px solid gray;
+    border-radius: 7px;
+}
+
+.post--form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.post--textarea {
+    outline: none;
+    padding: 15px;
+    border-radius: 7px;
+}
+
+input[type=file]::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: var(--blue);
+    padding: 10px 20px;
+    border-radius: 10px 0px 0px 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+  }
+  
+input[type=file]::file-selector-button:hover {
+    background: #0d45a5;
+}
+
+.post--file {
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+.post--form button {
+    border-radius: 7px;
+    border: 0;
+    background-color: var(--blue);
+    color: white;
+    padding: 7px 0px;
+}
+
+.post--form {
+    padding: 10px;
+    border-radius: 5px;
+    border: 0;
+    margin-top: 20px;
+}
