@@ -8,8 +8,8 @@
 }
 
 :root {
-    --blue : #084cdf;
-    --grey : rgb(244, 244, 244);
+    --blue : #0D6EFD;
+    --grey : #F8F9FA;
 }
 
 .wrapper {
@@ -37,7 +37,7 @@ nav .left--part {
 nav .right--part input {
     padding: 7px;
     outline: none;
-    border: 1px solid grey;
+    border: 1px solid rgb(209, 209, 209);
     border-radius: 5px;
 }
 
@@ -81,17 +81,19 @@ nav ul .name{
     outline: none;
     padding: 15px;
     border-radius: 7px;
+    border: 1px solid rgb(209, 209, 209);
 }
 
 input[type=file]::file-selector-button {
     margin-right: 20px;
     border: none;
-    background: var(--blue);
+    background: #E9ECEF;
     padding: 10px 20px;
     border-radius: 10px 0px 0px 10px;
-    color: #fff;
+    color: black;
     cursor: pointer;
     transition: .2s ease-in-out;
+    border: 0;
   }
   
 input[type=file]::file-selector-button:hover {
@@ -99,7 +101,7 @@ input[type=file]::file-selector-button:hover {
 }
 
 .post--file {
-    border: 1px solid gray;
+    border: 1px solid rgb(209, 209, 209);
     border-radius: 10px;
 }
 
@@ -107,9 +109,16 @@ input[type=file]::file-selector-button:hover {
     border-radius: 7px;
     border: 0;
     background-color: var(--blue);
+    height: 40px;
     color: white;
-    padding: 7px 0px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ph-paper-plane-tilt {
+    font-size: 18px;
 }
 
 .post--form {
