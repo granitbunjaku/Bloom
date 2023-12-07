@@ -6,13 +6,23 @@ var closeIcon = document.querySelector(".close--icon");
 var arrayDown = document.querySelector(".arrow--down");
 var sidebarOptions = document.querySelector(".sidenav--options");
 
-explore[0].addEventListener("click", () => {
-
+explore[0].addEventListener("click", (e) => {
+    e.stopPropagation();
     if(navOptions[0].style.display == "flex") {
         navOptions[0].style.display = "none";
     } else {
         navOptions[0].style.display = "flex";
     }
+})
+
+Array.from(navOptions).forEach(element => {
+    element.addEventListener("click", (e) => {
+        e.stopPropagation();
+    })
+});
+
+document.body.addEventListener("click", (e) => {
+    navOptions[0].style.display = "none";
 })
 
 arrayDown.addEventListener("click", () => {
@@ -27,10 +37,12 @@ arrayDown.addEventListener("click", () => {
 })
 
 sidebarIcon.addEventListener("click", () => {
+    document.body.style.overflowY = "hidden";
     sidebar.style.display = "flex";
 })
 
 closeIcon.addEventListener("click", () => {
+    document.body.style.overflowY = "scroll";
     sidebar.style.display = "none";
 })
 
