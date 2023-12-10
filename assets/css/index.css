@@ -111,7 +111,7 @@ nav ul .name{
     flex-direction: column;
     position: absolute;
     top: 50px;
-    width: 160px;
+    width: 250px;
     background-color: white;
     gap: 0;
     border: 1px solid var(--bd-dark-grey);
@@ -121,9 +121,29 @@ nav ul .name{
 
 .nav--options li {
     padding: 15px;
+    cursor: pointer;
 }
 
-.nav--options li:not(:last-child) {
+.nav--link {
+    color: black;
+    text-decoration: none;
+}
+
+.nav--options .nav--link:hover {
+    background-color: var(--grey);
+}
+
+.nav--options .nav--link:first-child:hover {
+    border-radius: 7px 7px 0px 0px;
+    background-color: var(--grey);
+}
+
+.nav--options .nav--link:last-child:hover {
+    border-radius: 0px 0px 7px 7px;
+    background-color: var(--grey);
+}
+
+.nav--options .nav--link:not(:last-child) {
     border-bottom: 1px solid var(--bd-dark-grey);
 }
 
@@ -550,7 +570,6 @@ nav ul .name{
     background-color: white;
     border-radius: 100%;
 }
-
 
 
 @media only screen and (max-width: 970px) {
