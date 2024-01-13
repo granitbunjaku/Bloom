@@ -17,7 +17,6 @@ body {
     width: 110px;
 }
 
-
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
@@ -93,6 +92,41 @@ button:hover {
 .error-message {
     color: #ff4d4d;
     margin: 0;
+}
+
+select {
+    padding: 10px 10px;
+    width: 100%;
+    outline: none;
+    border: 1px solid #cfcfcf;
+    background: transparent;
+    border-radius: 8px;
+    font-size: 0.90rem;
+    margin-bottom: 20px;
+}
+
+.error-holder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.last-part small {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+}
+
+.last-part {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: #0D6EFD;
 }
 
 @media screen and (max-width: 600px) {

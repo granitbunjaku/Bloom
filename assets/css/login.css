@@ -106,6 +106,30 @@ button:hover {
     margin: 0;
 }
 
+.last-part small {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+}
+
+.last-part {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: #0D6EFD;
+}
+
+.error-holder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
 @media screen and (max-width: 600px) {
     .login {
         width: 100%;

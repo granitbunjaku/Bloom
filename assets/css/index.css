@@ -284,6 +284,7 @@ nav ul .name{
     height: 100vh;
     flex-direction: column;
     gap: 20px;
+    z-index: 3;
 }
 
 .sidebar ul {
@@ -398,7 +399,7 @@ nav ul .name{
     border: var(--bd-thin) solid var(--bd-dark-grey);
 }
 
-.comment {
+.comment-holder {
     display: flex;
     gap: 30px;
 }
@@ -571,6 +572,73 @@ nav ul .name{
     border-radius: 100%;
 }
 
+.settings--error--holder,
+.settings--success--holder {
+    color: white;
+    padding: 15px 0px;
+    border-radius: 5px;
+    border: 0;
+    text-align: center;
+}
+
+.settings--error--holder {
+    background-color: #d53939;
+}
+
+.settings--success--holder {
+    background-color: #329f2b;
+}
+
+.settings--infos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.settings--input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.settings--input,
+.settings--infos {
+    padding: 0 20px;
+}
+
+.settings--input input {
+    padding: 10px 5px;
+    border: var(--bd-thin) solid var(--dark-grey);
+    outline: none;
+}
+
+.settings--input button{
+    padding: 10px 5px;
+    background-color: var(--blue);
+    border: 0;
+    border-radius: 5px;
+    outline: none;
+    color: white;
+    font-size: var(--fs-sm);
+    cursor: pointer;
+    font-weight: var(--fw-bold);
+}
+
+.comments .comment--body {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.comments .comment--body .deletelink--holder a{
+    cursor: pointer;
+}
+
+.comments {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
 
 @media only screen and (max-width: 970px) {
 
