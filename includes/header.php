@@ -27,7 +27,9 @@
                     <ul class="nav--options">
                         <?php if(isset($_SESSION['is_loggedin']) && $_SESSION['is_loggedin']) : ?>
                             <?php if(isset($_SESSION['is_admin']) && $_SESSION['is_admin']) : ?>
-                                <a href="/profile.php" class="nav--link"><li>Dashboard</li></a>
+                                <a href="./dashboard.php" class="nav--link"><li>Dashboard</li></a>
+                            <?php else: ?>
+                                <a href="./reportProblems.php" class="nav--link"><li>Report Problems</li></a>
                             <?php endif; ?>
                             <a href="./profile.php?id=<?=$_SESSION['user_id']?>" class="nav--link"><li>Profile</li></a>
                             <a href="./settings.php" class="nav--link"><li>Settings</li></a>
@@ -62,14 +64,14 @@
         <ul class="sidenav--options">
             <?php if(isset($_SESSION['is_loggedin']) && $_SESSION['is_loggedin']) : ?>
                 <?php if(isset($_SESSION['is_admin']) && $_SESSION['is_admin']) : ?>
-                    <a href="/profile.php" class="nav--link"><li>Dashboard</li></a>
+                    <a href="./dashboard.php" class="nav--link"><li>Dashboard</li></a>
                 <?php endif; ?>
-                <a href="/profile.php" class="nav--link"><li>Profile</li></a>
+                <a href="./profile.php?id=<?=$_SESSION['user_id']?>" class="nav--link"><li>Profile</li></a>
                 <a href="./settings.php" class="nav--link"><li>Settings</li></a>
                 <a href="?action=log_out" class="nav--link"><li>Log out</li></a>
             <?php else : ?>
-                <a href="login.php" class="nav--link"><li>Log In</li></a>
-                <a href="/register.php" class="nav--link"><li>Register</li></a>
+                <a href="./login.php" class="nav--link"><li>Log In</li></a>
+                <a href="./register.php" class="nav--link"><li>Register</li></a>
             <?php endif; ?>
         </ul>
         <input type="search" name="search" placeholder="Search">

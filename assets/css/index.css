@@ -665,6 +665,147 @@ nav ul .name{
     width: 95%;
 }
 
+.add--friend {
+    background-color: var(--blue);
+    color: white;
+}
+
+.pending--status {
+    background-color: orange;
+    color: white;
+}
+
+.add--friend,
+.pending--status {
+    padding: 8px 20px;
+    border: 0;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.infos img {
+    width: 50px;
+    border: 0;
+    border-radius: 40px;
+}
+
+.reject--friend {
+    color: red;
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.profile--friendsreq {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.infos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.friends--text {
+    padding: 20px 0px;
+}
+
+.friend--requests {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.friends {
+    flex-wrap: wrap;
+    display: flex;
+    gap: 20px;
+}
+
+.cart--img {
+     display: flex;
+     gap: 20px;
+}
+
+.report--form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 80%;
+    margin: 40px auto 0;
+}
+
+.report--form input {
+    height: 40px;
+    font-size: 17px;
+    padding: 10px;
+    outline: none;
+    border-radius: 5px;
+    border: 0;
+    border: var(--bd-thin) solid var(--dark-grey);
+}
+
+.report--form textarea {
+    padding: 10px;
+    font-size: 14px;
+    outline: none;
+    border-radius: 5px;
+    border: 0;
+    border: var(--bd-thin) solid var(--dark-grey);
+    max-width: 100%;
+}
+
+.reports img {
+    width: 60px;
+    border-radius: 50px;
+    border: 5px solid white;
+    box-shadow: 0 0 31px -15px rgb(0 0 0 / 54%);
+}
+
+.dashboard--reports {
+    margin-top: 30px;
+    padding: 0 20px;
+}
+
+.reports, .reports th, .reports td {
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.reports {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.reports th, .reports td {
+    padding: 5px;
+}
+
+.report--form button {
+     padding: 10px;
+     font-size: 16px;
+     background-color: var(--blue);
+     color: white;
+     font-weight: 600;
+     outline: none;
+     border: 0;
+     border-radius: 5px;
+     cursor: pointer;
+}
+
+.report--form input:focus,
+.report--form textarea:focus {
+    transition: var(--td-200) ease-in-out;
+    border: var(--bd-thin) solid var(--bd-light-blue);
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+}
+
 @media only screen and (max-width: 970px) {
 
     .left--profile--part .profile--header {

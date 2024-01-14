@@ -304,7 +304,7 @@
                     commentDiv.appendChild(imageDiv);
                     commentDiv.appendChild(bodyDiv);
 
-                    comments.appendChild(commentDiv);
+                    comment[i].parentNode.querySelector(".comments").appendChild(commentDiv);
 
                     nr.innerText = parseInt(nr.innerText) + 1;
                 }).catch(error => console.log('error'));
