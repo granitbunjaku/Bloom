@@ -3,42 +3,17 @@
 
     $_SESSION['title'] = 'Log In';
 
-    include('classes/CRUD.php');
-    include('classes/Roles.php');
+    include 'classes/Roles.php';
+    include 'classes/User.php';
+
     $crud = new CRUD;
+    $userDB = new User($crud);
+
     $errors = [];
 
     if ($_POST) {
         if (isset($_POST['loginButton'])) {
-
-            if (strlen($_POST['email']) < 11) {
-                $errors[] = "Too short! Please enter a valid email!";
-            }
-
-            if (strlen($_POST['password']) < 8) {
-                $errors[] = "Too short! Please enter a valid password!";
-            }
-
-            $user = $crud->read("users", ['email' => $_POST['email']], 1);
-
-            if($user) extract($user[0]);
-
-            if(!count($errors)) {
-                if (is_array($user) && count($user) > 0) {
-                    if (password_verify($_POST['password'], $password)) {
-                        $_SESSION['fullname'] = $fullname;
-                        $_SESSION['is_loggedin'] = true;
-                        $_SESSION['user_id'] = $id;
-                        $_SESSION['pfp'] = $pfp;
-                        $_SESSION['is_admin'] = ($roleId == Roles::ADMIN);
-                        header('Location: index.php');
-                    } else {
-                        $errors[] = "Wrong password!";
-                    }
-                } else {
-                    $errors[] = "Invalid user!";
-                }
-            }
+            $errors = $userDB->login();
         }
     }
 ?>

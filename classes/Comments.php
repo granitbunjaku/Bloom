@@ -3,11 +3,49 @@
 class Comments
 {
     private $connection = null;
+    private $crud;
 
-    public function __construct()
+    public function __construct(CRUD $crud = null)
     {
-        $db = Database::getInstance();
-        $this->connection = $db->getConnection();
+        $this->connection = Database::getInstance()->getConnection();
+        $this->crud = $crud;
+    }
+
+    public function editComment() {
+        $requestBody = file_get_contents('php://input');
+        $data = json_decode($requestBody, true);
+
+        $content = $data['content'];
+        $commentId = $data['comment_id'];
+        $uid = $data['user_id'];
+
+        if($uid === $_SESSION['user_id']) {
+            if(!strlen(trim($content)) <= 0) {
+                if($this->crud->update("comments", ['content' => $content], ['column' => 'id', 'value' => $commentId])) {
+                    header('X-Status-Code: 200');
+                } else {
+                    header('X-Status-Code: 400');
+                }
+            } else {
+                header('X-Status-Code: 400');
+            }
+        }
+    }
+
+    public function makeComment() {
+        $requestBody = file_get_contents("php://input");
+        $data = json_decode($requestBody, true);
+
+        $post_id = $data["postId"];
+        $content = $data["content"];
+
+        if(strlen(trim($data['content'])) > 0) {
+            $this->crud->create("comments", ['content' => $content, 'post_id' => $post_id, 'user_id' => $_SESSION['user_id']]);
+        } else {
+            http_response_code(404);
+        }
+
+        return $this->readLastComment($post_id)[0]['id'];
     }
 
     public function readComments()

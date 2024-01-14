@@ -3,58 +3,21 @@
 
     $_SESSION['title'] = 'Register';
 
-    include('classes/CRUD.php');
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+
+    include 'classes/User.php';
+
     $crud = new CRUD;
+    $userDB = new User($crud);
+
     $errors = [];
 
     $roles = $crud->read('roles');
 
     if ($_POST) {
         if (isset($_POST['signup-button'])) {
-            if (strlen($_POST['fullname']) < 5) {
-                $errors[] = "Too short! Please enter longer name!";
-            }
-
-            if (strlen($_POST['email']) < 11) {
-                $errors[] = "Too short! Please enter longer email!";
-            }
-
-            if (strlen($_POST['password']) < 8) {
-                $errors[] = "Too short! Please enter longer password!";
-            }
-
-            if ($_POST['confirm_password'] !== $_POST['password']) {
-                $errors[] = "Type same password for both password fields!";
-            }
-
-            if ($_POST['gender'] != 'Male' && $_POST['gender'] != 'Female') {
-                $errors[] = "Please select a gender!";
-            }
-
-            if ($_POST['role'] != 'Admin' && $_POST['role'] != 'User') {
-                $errors[] = "Please select a role!";
-            }
-
-            if (!count($errors)) {
-                $fullname = $_POST['fullname'];
-                $email = $_POST['email'];
-                $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-                $gender = $_POST['gender'];
-                $role = $_POST['role'];
-
-                if ($crud->create('users', [
-                    'fullname' => $fullname,
-                    'email' => $email,
-                    'password' => $password,
-                    'bio' => '',
-                    'gender' => $gender,
-                    'roleId' => $role == 'Admin' ? 1 : 2
-                ])) {
-                    header('Location: login.php');
-                } else {
-                    $errors[] = "Something went wrong!";
-                }
-            }
+            $errors = $userDB->regiser();
         }
     }
 ?>

@@ -28,7 +28,23 @@
                     <form class="editContentForm">
                         <input type="text" class="editContent" name="<?=$uid?>" value="<?= $content ?>" id="<?=$id?>" hidden>
                     </form>
-                    <p class="content" id="<?=$id?>"><?= $url[1] ?></p>
+                    <p class="content" id="<?=$id?>">
+                        <?php
+                            $arr = explode("iframe=", $content);
+                            foreach($arr as $a) {
+                                if(str_starts_with($a, "http")) {
+                                    $arrLink = explode(" ", $a, 2);
+
+                                    echo "<a href='$arrLink[0]'>$arrLink[0] </a>";
+
+                                    if(isset($arrLink[1])) {
+                                        echo $arrLink[1];
+                                    }
+                                } else {
+                                    echo $a;
+                                }
+
+                            } ?></p>
                 <?php else: ?>
                     <form class="editContentForm">
                         <input type="text" class="editContent" name="<?=$uid?>" value="<?= $content ?>" id="<?=$id?>" hidden>
@@ -46,7 +62,7 @@
                 </video>
             <?php elseif (str_contains($content, "iframe=")) : ?>
                 <?php $url = explode("=",$content); $content = explode("iframe",$url[0])[0]?>
-                <iframe width="420" height="315" class="iframe"
+                <iframe class="iframe"
                         src="<?=$url[1]?>">
                 </iframe>
             <?php endif; ?>
@@ -130,10 +146,19 @@
                 user_id: inputi.name
             })
             .then(data => {
-                commentContent[i].querySelector('p').style.display = "block";
-                commentContent[i].querySelector('p').innerText = data.data;
-                inputi.hidden = true;
-            });
+                const statusCode = data.headers['x-status-code'];
+
+                if (statusCode === '200') {
+                    commentContent[i].querySelector('p').innerText = inputi.value;
+                    commentContent[i].querySelector('p').style.display = "block";
+                    inputi.hidden = true;
+                } else {
+                    inputi.setAttribute("hidden", true);
+                    commentContent[i].querySelector("p").style.display = "block";
+                    inputi.value = commentContent[i].querySelector("p").innerText;
+                }
+
+            })
         });
     }
 
@@ -160,6 +185,8 @@
         postContent[i].addEventListener("click", (e) => {
             let user_id = <?=$_SESSION['user_id']?>;
 
+            let postIFrame = postContent[i].parentNode.querySelector('iframe');
+
             if(user_id == editForm[i].querySelector("input").name) {
                 postContent[i].querySelector("p").style.display = "none";
                 editForm[i].querySelector(".editContent").removeAttribute("hidden");
@@ -167,26 +194,51 @@
 
             editForm[i].addEventListener("submit", (e) => {
                 e.preventDefault();
+                const inputi = e.target.querySelector("input");
                 axios.post('editPost.php', {
-                    post_id: e.target.querySelector("input").id,
-                    new_content: e.target.querySelector("input").value,
-                    uid: e.target.querySelector("input").name
+                    post_id: inputi.id,
+                    new_content: inputi.value,
+                    uid: inputi.name
                 })
                     .then(data => {
-                        e.target.querySelector("input").setAttribute("hidden", true);
-                        postContent[i].querySelector("p").style.display = "block";
-                        let input = e.target.querySelector("input").value;
-                        if(input.startsWith("iframe=")) {
-                            let text = input.split("=");
-                            iframe[i].src = text[1];
-                            postContent[i].querySelector(".content").innerText = text[1];
+                        const statusCode = data.headers['x-status-code'];
+
+                        if (statusCode === '200') {
+                            e.target.querySelector("input").setAttribute("hidden", true);
+                            postContent[i].querySelector("p").style.display = "block";
+
+                            if(inputi.value.includes("iframe=")) {
+                                let text = inputi.value.split("=");
+                                if(postIFrame) postIFrame.src = text[1];
+                                let splitIframe = inputi.value.split("iframe=");
+
+                                let wholetext = "";
+
+                                splitIframe.forEach(t => {
+                                    if(t.startsWith("http")) {
+                                        const theText = t.split(" ");
+
+                                        wholetext += `<a href=${theText[0]}>${theText[0]} </a>`;
+
+                                        wholetext += t.split(theText[0])[1].trim();
+                                    } else {
+                                        console.log("why");
+                                        wholetext += t;
+                                    }
+                                });
+
+                                postContent[i].querySelector("p").innerHTML = wholetext;
+
+                            } else {
+                                postContent[i].querySelector(".content").innerText = inputi.value;
+                            }
                         } else {
-                            postContent[i].querySelector(".content").innerText = input;
+                            inputi.setAttribute("hidden", true);
+                            inputi.value = postContent[i].querySelector("p").innerText;
+                            postContent[i].querySelector("p").style.display = "block";
                         }
-                    }).catch(error => {
-                    e.target.querySelector("input").setAttribute("hidden", true);
-                    postContent[i].querySelector("p").style.display = "block";
-                });
+
+                    })
             })
 
         })

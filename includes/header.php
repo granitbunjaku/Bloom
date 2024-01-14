@@ -1,6 +1,8 @@
 <?php
     session_start();
-    include('classes/CRUD.php');
+
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
 
     if(isset($_GET['action']) && $_GET['action'] == "log_out") {
         session_destroy();

@@ -1,12 +1,7 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
     include 'includes/header.php';
     include 'createPost.php';
-    include 'classes/Posts.php';
 
     $_SESSION['title'] = 'Homepage';
 
@@ -14,7 +9,9 @@ error_reporting(E_ALL);
         header('Location: login.php');
     }
 
-    $postDB = new Posts();
+    $crud = new CRUD();
+    $postDB = new Posts($crud);
+
     $posts = $postDB->readPosts();
 
 ?>

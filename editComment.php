@@ -1,21 +1,11 @@
 <?php
 
 include 'classes/CRUD.php';
+include 'classes/Comments.php';
+
 $crud = new CRUD;
+$commentDB = new Comments($crud);
 
 session_start();
 
-$requestBody = file_get_contents('php://input');
-$data = json_decode($requestBody, true);
-
-$content = $data['content'];
-$commentId = $data['comment_id'];
-$uid = $data['user_id'];
-
-if($uid === $_SESSION['user_id']) {
-    if($crud->update("comments", ['content' => $content], ['column' => 'id', 'value' => $commentId])) {
-        echo $content;
-    } else {
-        http_response_code(404);
-    }
-}
+echo $commentDB->editComment();

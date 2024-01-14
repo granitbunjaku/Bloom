@@ -1,5 +1,27 @@
 <?php
-    include('readProfile.php');
+    include 'includes/header.php';
+    include 'classes/User.php';
+
+    $crud = new CRUD;
+    $postDB = new Posts($crud);
+    $userDB = new User($crud, $postDB);
+
+    $user = $userDB->getUserProfile();
+
+    extract($user[0]);
+
+    $posts = $userDB->getUserPosts($id);
+
+    if (count($_FILES) > 0) {
+
+        if ($_FILES["newbanner"]) {
+            $userDB->updateBanner($id);
+        }
+
+        if ($_FILES["newpfp"]) {
+            $userDB->updateProfilePicture($id);
+        }
+    }
 ?>
 
 <div class="profile--header">
@@ -64,16 +86,19 @@
     </div>
 
     <div class="right--profile--part">
-        <form action="<?php $_SERVER['PHP_SELF'] ?>" class="post--form" method="post" enctype="multipart/form-data">
-            <div class="post--textarea">
-                <textarea name="content" id="" cols="30" rows="3"></textarea>
-                <label for="textarea--label">What's on your mind?</label>
-            </div>
-            <div class="post--file">
-                <input type="file" id="file" name="post-file">
-            </div>
-            <button type="submit" name="post-button"><i class="ph ph-paper-plane-tilt"></i></button>
-        </form>
+
+        <?php if($_SESSION['user_id'] == $id) : ?>
+            <form action="<?php $_SERVER['PHP_SELF'] ?>" class="post--form" method="post" enctype="multipart/form-data">
+                <div class="post--textarea">
+                    <textarea name="content" id="" cols="30" rows="3"></textarea>
+                    <label for="textarea--label">What's on your mind?</label>
+                </div>
+                <div class="post--file">
+                    <input type="file" id="file" name="post-file">
+                </div>
+                <button type="submit" name="post-button"><i class="ph ph-paper-plane-tilt"></i></button>
+            </form>
+        <?php endif; ?>
 
         <?php include 'post.php'; ?>
     </div>

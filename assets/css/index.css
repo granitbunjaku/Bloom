@@ -622,12 +622,33 @@ nav ul .name{
     font-size: var(--fs-sm);
     cursor: pointer;
     font-weight: var(--fw-bold);
+    margin-bottom: 20px;
 }
 
 .comments .comment--body {
     display: flex;
     justify-content: space-between;
     width: 100%;
+}
+
+.iframe {
+    border: 0;
+}
+
+.editContent {
+    width: 100%;
+    height: 45px;
+    border: var(--bd-thin) solid var(--dark-grey);
+    border-radius: 7px;
+    padding: 0 10px;
+    outline: none;
+    font-size: 15px;
+}
+
+.editContent:focus {
+    transition: var(--td-200) ease-in-out;
+    border: var(--bd-thin) solid var(--bd-light-blue);
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
 }
 
 .comments .comment--body .deletelink--holder a{
@@ -638,6 +659,10 @@ nav ul .name{
     display: flex;
     gap: 20px;
     flex-direction: column;
+}
+
+.comment--content {
+    width: 95%;
 }
 
 @media only screen and (max-width: 970px) {
@@ -659,6 +684,7 @@ nav ul .name{
         transform: translateY(-20rem);
     }
 }
+
 
 @media only screen and (max-width: 700px) {
     .left--profile--part .profile--header {
