@@ -52,8 +52,6 @@ class Posts
         }
 
         if (count($errors) === 0) {
-            $content = $_POST['content'];
-
             if ($_FILES) {
                 if (str_starts_with($_FILES['post-file']['type'], 'image')) {
                     $imagefile = time() . $_FILES['post-file']['name'];
@@ -79,7 +77,11 @@ class Posts
                     move_uploaded_file($_FILES['post-file']['tmp_name'], 'post-videos/' . $videofile);
                 }
 
-                header('Location: index.php');
+                if(isset($_GET['id'])) {
+                    header('Location: profile.php?id='.$_GET['id']);
+                } else {
+                    header('Location: index.php');
+                }
             }
         }
     }

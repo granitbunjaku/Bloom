@@ -17,7 +17,7 @@
                 </div>
                 <div>
                     <?php if($uid === $_SESSION['user_id']) : ?>
-                        <a href="deleteItems.php?post_id=<?=$id?>" style="text-decoration: none; color: black; font-weight:600;">Delete</a>
+                        <a href="deleteItems.php?post_id=<?=$id?><?= isset($_GET['id']) ? "&id=".$_GET['id'] : ''?>" style="text-decoration: none; color: black; font-weight:600;">Delete</a>
                     <?php endif; ?>
                 </div>
             </div>
