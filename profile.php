@@ -1,5 +1,6 @@
 <?php
-    include 'includes/header.php';
+    session_start();
+
     include 'classes/Friends.php';
     include 'classes/User.php';
 
@@ -11,6 +12,15 @@
     $user = $userDB->getUserProfile();
 
     extract($user[0]);
+
+    if ($_GET['id'] === $_SESSION['user_id']) {
+        $_SESSION['title'] = "My Profile";
+    } else {
+        $_SESSION['title'] = "Profile of ".$user[0]['fullname'];
+    }
+
+    include 'includes/header.php';
+
 
     $posts = $userDB->getUserPosts($id);
 
@@ -95,7 +105,7 @@
                             <a class="reject--friend" href="rejectRequest.php?id=<?=$friendStatus[0]['user_id']?>">Reject</a>
                         </div>
                     <?php else: ?>
-                        <a class="btn btn-danger mb-2" name="unfriend" href="rejectRequest.php?id=<?= $id ?>">Unfriend</a>
+                        <a class="btn btn-danger mb-2 unfriend" name="unfriend" href="rejectRequest.php?id=<?= $id ?>">Unfriend</a>
                     <?php endif;?>
                 <?php endif; ?>
             </form>

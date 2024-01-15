@@ -675,8 +675,14 @@ nav ul .name{
     color: white;
 }
 
+.unfriend {
+    background-color: red;
+    color: white;
+}
+
 .add--friend,
-.pending--status {
+.pending--status,
+.unfriend {
     padding: 8px 20px;
     border: 0;
     border-radius: 7px;

@@ -1,4 +1,7 @@
 <?php
+session_start();
+$_SESSION['title'] = 'Account Settings';
+
 include('includes/header.php');
 include('classes/User.php');
 

@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    $_SESSION['title'] = 'Report Problems';
 
     include 'includes/header.php';
     include 'classes/CRUD.php';

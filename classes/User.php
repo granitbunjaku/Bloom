@@ -184,17 +184,7 @@ class User
     public function getUserProfile()
     {
         if (isset($_GET['id'])) {
-            $userId = $_GET['id'];
-
-            if ($userId === $_SESSION['user_id']) {
-                $user = $this->crud->read("users", ['id' => $_SESSION['user_id']]);
-                $_SESSION['title'] = "My Profile";
-            } else {
-                $user = $this->crud->read("users", ['id' => $userId]);
-                $_SESSION['title'] = "Profile of ".$user[0]['fullname'];
-            }
-
-            return $user;
+            return $this->crud->read("users", ['id' => $_GET['id']]);
         }
 
         return null;

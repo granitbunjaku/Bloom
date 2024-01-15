@@ -1,5 +1,8 @@
 <?php
 
+session_start();
+$_SESSION['title'] = 'Dashboard';
+
 include 'includes/header.php';
 include 'classes/CRUD.php';
 include 'classes/Reports.php';

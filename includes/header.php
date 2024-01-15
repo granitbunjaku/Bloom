@@ -21,7 +21,7 @@
         <div class="left--part">
             <a href="./index.php"><img src="images/Bloom.png" alt="bloom logo"></a>
             <ul>
-                <li>Home</li>
+                <a href="./index.php" class="nav--link"><li>Home</li></a>
                 <li class="explore"><?= isset($_SESSION['is_loggedin']) && $_SESSION['is_loggedin'] ? $_SESSION["fullname"] : "Guest" ?>
                     <i class="ph ph-caret-down arrow--down2"></i>
                     <ul class="nav--options">
@@ -66,7 +66,7 @@
         <i class="ph ph-x close--icon"></i>
     </div>
     <ul>
-        <li>Home</li>
+        <a href="./index.php" class="nav--link"><li>Home</li></a>
         <li class="explore">Explore <i class="ph ph-caret-down arrow--down"></i></li>
         <ul class="sidenav--options">
             <?php if(isset($_SESSION['is_loggedin']) && $_SESSION['is_loggedin']) : ?>

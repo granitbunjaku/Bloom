@@ -1,9 +1,9 @@
 <?php
+    session_start();
+    $_SESSION['title'] = 'Homepage';
 
     include 'includes/header.php';
     include 'createPost.php';
-
-    $_SESSION['title'] = 'Homepage';
 
     if(!isset($_SESSION['is_loggedin'])) {
         header('Location: login.php');
@@ -15,6 +15,7 @@
     $posts = $postDB->readPosts();
 
 ?>
+
 
 <div class="wrapper">
     <form action="<?php $_SERVER['PHP_SELF'] ?>" class="post--form" method="post" enctype="multipart/form-data">
