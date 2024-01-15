@@ -29,7 +29,7 @@ class Reports
     }
 
     public function getAllReports() {
-        $sql = "SELECT r.title, r.content, u.email, u.pfp FROM reports as r JOIN users as u ON r.user_id = u.id";
+        $sql = "SELECT r.title, r.content, u.email FROM reports as r JOIN users as u ON r.user_id = u.id";
 
         $results = [];
 

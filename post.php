@@ -62,7 +62,7 @@
                 </video>
             <?php elseif (str_contains($content, "iframe=")) : ?>
                 <?php $url = explode("=",$content); $content = explode("iframe",$url[0])[0]?>
-                <iframe class="iframe"
+                <iframe height="480px" class="iframe"
                         src="<?=$url[1]?>">
                 </iframe>
             <?php endif; ?>
@@ -130,9 +130,14 @@
 
     for(let i = 0; i < commentContent.length; i++) {
         commentContent[i].addEventListener("click", () => {
-            commentContent[i].querySelector('p').style.display = "none";
+            let user_id = <?=$_SESSION['user_id']?>;
             let inputi = commentContent[i].querySelector(".editCommentForm input");
-            inputi.removeAttribute("hidden");
+
+            if(user_id == inputi.name) {
+                commentContent[i].querySelector('p').style.display = "none";
+                inputi.removeAttribute("hidden");
+            }
+
         })
 
         commentContent[i].querySelector('.editCommentForm').addEventListener('submit', (e) => {
@@ -222,7 +227,6 @@
 
                                         wholetext += t.split(theText[0])[1].trim();
                                     } else {
-                                        console.log("why");
                                         wholetext += t;
                                     }
                                 });
