@@ -806,6 +806,43 @@ nav ul .name{
     box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
 }
 
+.search--div {
+    position: relative;
+}
+
+.info--div img {
+    width: 50px;
+    border-radius: 40px;
+}
+
+.info--div {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    width: 250px;
+}
+
+.node-id {
+    position: absolute;
+    z-index: 999;
+    top: 60px;
+    background-color: white;
+    padding: 10px;
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: var(--bx-shadow);
+    left: -30px;
+}
+
+.search--div form{
+    margin: 0px;
+}
+
+.logo {
+    width: 100px;
+}
+
 @media only screen and (max-width: 970px) {
 
     .left--profile--part .profile--header {

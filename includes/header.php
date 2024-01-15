@@ -42,7 +42,14 @@
                 </li>
         </div>
         <div class="right--part">
-            <input type="search" name="search" placeholder="Search">
+            <div class="search--div">
+                <?php if (isset($_SESSION['is_loggedin'])) : ?>
+                    <form class="" role="search">
+                        <input class="search" type="search" name="search" placeholder="Search">
+                    </form>
+                <?php endif; ?>
+                <div id="node-id" class="node-id"></div>
+            </div>
         </div>
 
         <div class="icon">
@@ -74,7 +81,27 @@
                 <a href="./register.php" class="nav--link"><li>Register</li></a>
             <?php endif; ?>
         </ul>
-        <input type="search" name="search" placeholder="Search">
+    </ul>
+    <input type="search" name="search" placeholder="Search">
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="assets/js/script.js"></script>
+
+<script>
+    let search = document.getElementsByClassName("search")[0];
+    let body = document.body;
+    let node = document.getElementById('node-id');
+
+    search.addEventListener("keyup", (e) => {
+        axios.get(`./search.php?search=${e.target.value}`)
+            .then(data => {
+                node.innerHTML = data.data;
+                node.style.display = "flex";
+            });
+    })
+
+    body.addEventListener("click", () => {
+        node.style.display = "none";
+    })
+</script>
