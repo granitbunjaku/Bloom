@@ -844,6 +844,12 @@ nav ul .name{
     color: white;
 }
 
+.node-id-sidebar {
+     width: 100%;
+     flex-direction: column;
+     gap: 15px;
+ }
+
 @media only screen and (max-width: 970px) {
 
     .left--profile--part .profile--header {

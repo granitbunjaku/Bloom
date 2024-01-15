@@ -44,7 +44,7 @@
         <div class="right--part">
             <div class="search--div">
                 <?php if (isset($_SESSION['is_loggedin'])) : ?>
-                    <form class="" role="search">
+                    <form class="">
                         <input class="search" type="search" name="search" placeholder="Search">
                     </form>
                 <?php endif; ?>
@@ -82,7 +82,12 @@
             <?php endif; ?>
         </ul>
     </ul>
-    <input type="search" name="search" placeholder="Search">
+    <?php if (isset($_SESSION['is_loggedin'])) : ?>
+        <form class="">
+            <input class="search" type="search" name="search" placeholder="Search">
+        </form>
+    <?php endif; ?>
+    <div id="node-id-sidebar" class="node-id-sidebar"></div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -90,8 +95,10 @@
 
 <script>
     let search = document.getElementsByClassName("search")[0];
+    let searchSidebar = document.getElementsByClassName("search")[1];
     let body = document.body;
     let node = document.getElementById('node-id');
+    let nodeSidebar = document.getElementById('node-id-sidebar');
 
     search.addEventListener("keyup", (e) => {
         axios.get(`./search.php?search=${e.target.value}`)
@@ -101,7 +108,17 @@
             });
     })
 
+    searchSidebar.addEventListener("keyup", (e) => {
+        axios.get(`./search.php?search=${e.target.value}`)
+            .then(data => {
+                nodeSidebar.innerHTML = data.data;
+                nodeSidebar.style.display = "flex";
+            });
+    })
+
+
     body.addEventListener("click", () => {
         node.style.display = "none";
+        nodeSidebar.style.display = "none";
     })
 </script>
