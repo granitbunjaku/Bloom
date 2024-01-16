@@ -1,6 +1,10 @@
 <?php
     session_start();
 
+    if(isset($_SESSION['is_loggedin']) && $_SESSION['is_loggedin']) {
+        header('Location: index.php');
+    }
+
     $_SESSION['title'] = 'Register';
 
     error_reporting(E_ALL);
@@ -17,7 +21,7 @@
 
     if ($_POST) {
         if (isset($_POST['signup-button'])) {
-            $errors = $userDB->regiser();
+            $errors = $userDB->register();
         }
     }
 ?>

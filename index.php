@@ -1,13 +1,15 @@
 <?php
     session_start();
+
+    if(!isset($_SESSION['is_loggedin'])) {
+        header('Location: login.php');
+    }
+
     $_SESSION['title'] = 'Homepage';
 
     include 'includes/header.php';
     include 'createPost.php';
 
-    if(!isset($_SESSION['is_loggedin'])) {
-        header('Location: login.php');
-    }
 
     $crud = new CRUD();
     $postDB = new Posts($crud);

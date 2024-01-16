@@ -12,7 +12,7 @@ class User
         $this->postDB = $postDB;
     }
 
-    public function regiser() {
+    public function register() {
         $user = $this->crud->read("users", ['email' => $_POST['email']], 1);
 
         $errors = [];

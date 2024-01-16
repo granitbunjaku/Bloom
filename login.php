@@ -1,6 +1,10 @@
 <?php
     session_start();
 
+    if(isset($_SESSION['is_loggedin']) && $_SESSION['is_loggedin']) {
+        header('Location: index.php');
+    }
+
     $_SESSION['title'] = 'Log In';
 
     include 'classes/Roles.php';
