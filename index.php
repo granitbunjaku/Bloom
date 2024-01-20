@@ -32,7 +32,23 @@
     </form>
 </div>
 
+<div class="wrapper slider">
+    <i class="ph ph-arrow-left prev--icon" onclick="slide(-1)"></i>
+    <div class="slides">
+        <?php foreach($posts as $post): ?>
+            <?php if($post['image']): ?>
+                <div class="slideItem" style="background-image: url('post-photos/<?=$post['image']?>');">
+                    <p><?= $post['content'] ?></p>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+    <i class="ph ph-arrow-right next--icon" onclick="slide(1)"></i>
+</div>
+
 <div class="wrapper">
     <?php include 'post.php'; ?>
 </div>
+
+<script src="assets/js/slider.js"></script>
 

@@ -30,11 +30,8 @@ registerForm.addEventListener("submit", (e) => {
         errors.push("Confirm password should match the password");
     }
     
-    
     if (errors.length > 0) {
         displayErrors(errors);
-    } else {
-        console.log("Login successful!");
     }
 });
 
