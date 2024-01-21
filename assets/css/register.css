@@ -129,6 +129,12 @@ a {
     color: #0D6EFD;
 }
 
+.error-holder-js {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 @media screen and (max-width: 600px) {
     .login {
         width: 100%;

@@ -39,21 +39,21 @@
         <a href="index.php"><img src="images/Bloom.png" alt="bloom logo"></a>
 
         <label for="fullname">Name</label>
-        <input type="text" name="fullname" id="fullname">
+        <input type="text" name="fullname" id="fullname" class="fullname">
         <label for="email">Email</label>
-        <input type="text" name="email" id="email">
+        <input type="text" name="email" id="email" class="email">
         <label for="password">Password</label>
-        <input type="password" name="password" id="password">
+        <input type="password" name="password" id="password" class="password">
         <label for="confirm_password">Confirm Password</label>
-        <input type="password" name="confirm_password" id="confirm_password">
+        <input type="password" name="confirmPassword" id="confirmPassword" class="confirmPassword">
         <label for="gender">Gender</label>
-        <select name="gender">
+        <select name="gender" class="gender">
             <option value="">Select your gender</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
         </select>
         <label for="role">Role</label>
-        <select id="role" name="role">
+        <select id="role" name="role" class="role">
             <option value="">Select your role</option>
             <?php foreach($roles as $column => $value) : ?>
                 <option name="<?= $value['name'] ?>"><?= $value['name'] ?></option>
@@ -70,7 +70,11 @@
                 <p class="error-message" id="errorMessage"><?=$error?></p>
             <?php endforeach; ?>
         </div>
+
+        <div class="error-holder-js"></div>
     </form>
+
+    <script src="assets/js/register.js"></script>
 
 </body>
 

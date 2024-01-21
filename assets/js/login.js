@@ -1,22 +1,14 @@
-let registerForm = document.querySelector(".register");
+let loginForm = document.querySelector(".login");
 let errorContainer = document.querySelector(".error-holder-js");
 let errorContainer2 = document.querySelector(".error-holder");
 const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
-registerForm.addEventListener("submit", (e) => {
+loginForm.addEventListener("submit", (e) => {
     clearErrors();
 
-    const name = e.target.fullname?.value.trim();
     const email = e.target.email?.value.trim();
     const password = e.target.password?.value.trim();
-    const confirmPassword = e.target.confirmPassword?.value.trim();
-    const gender = e.target.gender?.value.trim();
-    const role = e.target.role?.value.trim();
 
     var errors = [];
-
-    if(name.length < 5) {
-        errors.push("Name should be longer than 4 characters");
-    }
 
     if(!emailRegex.test(email)) {
         errors.push("Email doesn't meet the requirements");
@@ -24,20 +16,6 @@ registerForm.addEventListener("submit", (e) => {
 
     if(password.length <= 7) {
         errors.push("Password should be longer than 7 characters");
-    }
-
-    if(password !== confirmPassword) {
-        console.log(password);
-        console.log(confirmPassword);
-        errors.push("Password and confirm password should match");
-    }
-
-    if(gender !== "Male" && gender !== "Female") {
-        errors.push("Gender should be male or female");
-    }
-
-    if(role !== "Admin" && role !== "User") {
-        errors.push("Role should be admin or user");
     }
 
     if (errors.length > 0) {

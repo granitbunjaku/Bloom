@@ -22,30 +22,6 @@ class User
             return $errors;
         }
 
-        if (strlen($_POST['fullname']) < 5) {
-            $errors[] = "Too short! Please enter longer name!";
-        }
-
-        if (strlen($_POST['email']) < 11) {
-            $errors[] = "Too short! Please enter longer email!";
-        }
-
-        if (strlen($_POST['password']) < 8) {
-            $errors[] = "Too short! Please enter longer password!";
-        }
-
-        if ($_POST['confirm_password'] !== $_POST['password']) {
-            $errors[] = "Type same password for both password fields!";
-        }
-
-        if ($_POST['gender'] != 'Male' && $_POST['gender'] != 'Female') {
-            $errors[] = "Please select a gender!";
-        }
-
-        if ($_POST['role'] != 'Admin' && $_POST['role'] != 'User') {
-            $errors[] = "Please select a role!";
-        }
-
         if (!count($errors)) {
             $fullname = $_POST['fullname'];
             $email = $_POST['email'];
@@ -74,36 +50,24 @@ class User
     public function login() {
         $errors = [];
 
-        if (strlen($_POST['email']) < 11) {
-            $errors[] = "Too short! Please enter a valid email!";
-        }
-
-        if (strlen($_POST['password']) < 8) {
-            $errors[] = "Too short! Please enter a valid password!";
-        }
-
         $user = $this->crud->read("users", ['email' => $_POST['email']], 1);
 
         if($user) extract($user[0]);
 
-        if(!count($errors)) {
-            if (is_array($user) && count($user) > 0) {
-                if (password_verify($_POST['password'], $password)) {
-                    $_SESSION['fullname'] = $fullname;
-                    $_SESSION['is_loggedin'] = true;
-                    $_SESSION['user_id'] = $id;
-                    $_SESSION['pfp'] = $pfp;
-                    $_SESSION['is_admin'] = ($roleId == Roles::ADMIN);
-                    header('Location: index.php');
-                } else {
-                    $errors[] = "Wrong password!";
-                    return $errors;
-                }
+        if (is_array($user) && count($user) > 0) {
+            if (password_verify($_POST['password'], $password)) {
+                $_SESSION['fullname'] = $fullname;
+                $_SESSION['is_loggedin'] = true;
+                $_SESSION['user_id'] = $id;
+                $_SESSION['pfp'] = $pfp;
+                $_SESSION['is_admin'] = ($roleId == Roles::ADMIN);
+                header('Location: index.php');
             } else {
-                $errors[] = "Invalid user!";
+                $errors[] = "Wrong password!";
                 return $errors;
             }
         } else {
+            $errors[] = "Invalid user!";
             return $errors;
         }
     }

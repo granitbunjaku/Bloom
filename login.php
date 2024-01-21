@@ -44,7 +44,7 @@
             <input type="password" name="password" id="password" required>
 
             <div class="form-footer">
-                <button type="submit" name="loginButton">LOGIN</button>
+                <button type="submit" name="loginButton" class="loginButton">LOGIN</button>
 
                 <div class="last-part">
                     <small>Don't have an account yet? <a href="register.php">Register</a></small>
@@ -57,8 +57,12 @@
                     <p class="error-message" id="errorMessage"><?=$error?></p>
                 <?php endforeach; ?>
             </div>
+
+            <div class="error-holder-js"></div>
         </form>
     </div>
+
+    <script src="assets/js/login.js"></script>
 
 </body>
 
