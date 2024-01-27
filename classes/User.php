@@ -27,7 +27,6 @@ class User
             $email = $_POST['email'];
             $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $gender = $_POST['gender'];
-            $role = $_POST['role'];
 
             if ($this->crud->create('users', [
                 'fullname' => $fullname,
@@ -35,7 +34,7 @@ class User
                 'password' => $password,
                 'bio' => '',
                 'gender' => $gender,
-                'roleId' => $role == 'Admin' ? 1 : 2
+                'roleId' => 2
             ])) {
                 header('Location: login.php');
             } else {

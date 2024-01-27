@@ -25,12 +25,23 @@
     $posts = $userDB->getUserPosts($id);
 
     if (count($_FILES) > 0) {
-
         if ($_FILES["newbanner"]) {
+            if($banner) {
+                if(file_exists('bannerpics/'.$banner)) {
+                    unlink('bannerpics/'.$banner);
+                }
+            }
+
             $userDB->updateBanner($id);
         }
 
         if ($_FILES["newpfp"]) {
+            if($pfp) {
+                if(file_exists('profilepics/'.$pfp)) {
+                    unlink('profilepics/'.$pfp);
+                }
+            }
+
             $userDB->updateProfilePicture($id);
         }
     }
@@ -64,7 +75,7 @@
 ?>
 
 <div class="profile--header">
-    <img src="bannerpics/<?= $cover ?>" class="profile--cover" alt="">
+    <div class="profile--cover" style="background-image: url('bannerpics/<?= $cover ?>');">
     </div>
     <?php if($_SESSION['user_id'] == $id) : ?>
         <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">

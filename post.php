@@ -28,23 +28,7 @@
                     <form class="editContentForm">
                         <input type="text" class="editContent" name="<?=$uid?>" value="<?= $content ?>" id="<?=$id?>" hidden>
                     </form>
-                    <p class="content" id="<?=$id?>">
-                        <?php
-                            $arr = explode("iframe=", $content);
-                            foreach($arr as $a) {
-                                if(str_starts_with($a, "http")) {
-                                    $arrLink = explode(" ", $a, 2);
-
-                                    echo "<a href='$arrLink[0]'>$arrLink[0] </a>";
-
-                                    if(isset($arrLink[1])) {
-                                        echo $arrLink[1];
-                                    }
-                                } else {
-                                    echo $a;
-                                }
-
-                            } ?></p>
+                    <p class="content" id="<?=$id?>"><?= $content1 ?></p>
                 <?php else: ?>
                     <form class="editContentForm">
                         <input type="text" class="editContent" name="<?=$uid?>" value="<?= $content ?>" id="<?=$id?>" hidden>
@@ -104,9 +88,11 @@
                                     <input type="text" class="form-control editContent" name="<?=$comment['id']?>" value="<?= $comment['content'] ?>" id="<?=$comment['comment_id']?>" hidden>
                                 </form>
                             </div>
-                            <div class="deletelink--holder">
-                                <a id="<?= $comment['comment_id']?>" class="delete--comment">Delete</a>
-                            </div>
+                            <?php if($_SESSION['user_id'] == $comment['id']) : ?>
+                                <div class="deletelink--holder">
+                                    <a id="<?= $comment['comment_id']?>" class="delete--comment">Delete</a>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -213,27 +199,14 @@
                             postContent[i].querySelector("p").style.display = "block";
 
                             if(inputi.value.includes("iframe=")) {
-                                let text = inputi.value.split("=");
-                                if(postIFrame) postIFrame.src = text[1];
-                                let splitIframe = inputi.value.split("iframe=");
-
-                                let wholetext = "";
-
-                                splitIframe.forEach(t => {
-                                    if(t.startsWith("http")) {
-                                        const theText = t.split(" ");
-
-                                        wholetext += `<a href=${theText[0]}>${theText[0]} </a>`;
-
-                                        wholetext += t.split(theText[0])[1].trim();
-                                    } else {
-                                        wholetext += t;
-                                    }
-                                });
-
-                                postContent[i].querySelector("p").innerHTML = wholetext;
+                                let text = inputi.value.split("iframe=");
+                                postIFrame.style.display = "block";
+                                postIFrame.src = text[1];
+                                postContent[i].querySelector("p").innerHTML = text[0];
 
                             } else {
+                                if(postIFrame) postIFrame.src = "";
+                                if(postIFrame) postIFrame.style.display = "none";
                                 postContent[i].querySelector(".content").innerText = inputi.value;
                             }
                         } else {

@@ -1,10 +1,6 @@
 <?php
     session_start();
 
-    if(!isset($_SESSION['is_loggedin'])) {
-        header('Location: login.php');
-    }
-
     $_SESSION['title'] = 'Homepage';
 
     include 'includes/header.php';
@@ -16,6 +12,15 @@
 
     $posts = $postDB->readPosts();
 
+    $counterOfPhotos = 0;
+
+    foreach($posts as $post) {
+        if($counterOfPhotos == 0 && $post['image'] != null) {
+            $counterOfPhotos++;
+        } else if($counterOfPhotos > 0) {
+            break;
+        }
+    }
 ?>
 
 
@@ -32,19 +37,21 @@
     </form>
 </div>
 
-<div class="wrapper slider">
-    <i class="ph ph-arrow-left prev--icon" onclick="slide(-1)"></i>
-    <div class="slides">
-        <?php foreach($posts as $post): ?>
-            <?php if($post['image']): ?>
-                <div class="slideItem" style="background-image: url('post-photos/<?=$post['image']?>');">
-                    <p><?= $post['content'] ?></p>
-                </div>
-            <?php endif; ?>
-        <?php endforeach; ?>
+<?php if($counterOfPhotos > 0) : ?>
+    <div class="wrapper slider">
+        <i class="ph ph-arrow-left prev--icon" onclick="slide(-1)"></i>
+        <div class="slides">
+            <?php foreach($posts as $post): ?>
+                <?php if($post['image']): ?>
+                    <div class="slideItem" style="background-image: url('post-photos/<?=$post['image']?>');">
+                        <p><?= $post['content'] ?></p>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+        <i class="ph ph-arrow-right next--icon" onclick="slide(1)"></i>
     </div>
-    <i class="ph ph-arrow-right next--icon" onclick="slide(1)"></i>
-</div>
+<?php endif; ?>
 
 <div class="wrapper">
     <?php include 'post.php'; ?>

@@ -1,9 +1,10 @@
 <?php
     session_start();
 
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-
+    if(!isset($_SESSION['is_loggedin'])) {
+        header('Location: login.php');
+    }
+    
     if(isset($_GET['action']) && $_GET['action'] == "log_out") {
         session_destroy();
         header('Location: ./login.php');
@@ -32,6 +33,7 @@
                                 <a href="./reportProblems.php" class="nav--link"><li>Report Problems</li></a>
                             <?php endif; ?>
                             <a href="./profile.php?id=<?=$_SESSION['user_id']?>" class="nav--link"><li>Profile</li></a>
+                            <a href="./chatPage.php" class="nav--link"><li>Chat</li></a>
                             <a href="./settings.php" class="nav--link"><li>Settings</li></a>
                             <a href="?action=log_out" class="nav--link"><li>Log out</li></a>
                         <?php else : ?>
@@ -74,6 +76,7 @@
                     <a href="./dashboard.php" class="nav--link"><li>Dashboard</li></a>
                 <?php endif; ?>
                 <a href="./profile.php?id=<?=$_SESSION['user_id']?>" class="nav--link"><li>Profile</li></a>
+                <a href="./chatPage.php" class="nav--link"><li>Chat</li></a>
                 <a href="./settings.php" class="nav--link"><li>Settings</li></a>
                 <a href="?action=log_out" class="nav--link"><li>Log out</li></a>
             <?php else : ?>

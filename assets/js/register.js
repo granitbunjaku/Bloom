@@ -10,7 +10,6 @@ registerForm.addEventListener("submit", (e) => {
     const password = e.target.password?.value.trim();
     const confirmPassword = e.target.confirmPassword?.value.trim();
     const gender = e.target.gender?.value.trim();
-    const role = e.target.role?.value.trim();
 
     var errors = [];
 
@@ -34,10 +33,6 @@ registerForm.addEventListener("submit", (e) => {
 
     if(gender !== "Male" && gender !== "Female") {
         errors.push("Gender should be male or female");
-    }
-
-    if(role !== "Admin" && role !== "User") {
-        errors.push("Role should be admin or user");
     }
 
     if (errors.length > 0) {

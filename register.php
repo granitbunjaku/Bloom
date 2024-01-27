@@ -7,17 +7,12 @@
 
     $_SESSION['title'] = 'Register';
 
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-
     include 'classes/User.php';
 
     $crud = new CRUD;
     $userDB = new User($crud);
 
     $errors = [];
-
-    $roles = $crud->read('roles');
 
     if ($_POST) {
         if (isset($_POST['signup-button'])) {
@@ -51,13 +46,6 @@
             <option value="">Select your gender</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
-        </select>
-        <label for="role">Role</label>
-        <select id="role" name="role" class="role">
-            <option value="">Select your role</option>
-            <?php foreach($roles as $column => $value) : ?>
-                <option name="<?= $value['name'] ?>"><?= $value['name'] ?></option>
-            <?php endforeach; ?>
         </select>
         <button type="submit" name="signup-button">REGISTER</button>
 
