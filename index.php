@@ -6,7 +6,6 @@
     include 'includes/header.php';
     include 'createPost.php';
 
-
     $crud = new CRUD();
     $postDB = new Posts($crud);
 

@@ -242,6 +242,10 @@
                     content = document.createElement('p');
                     deleteLinkDiv = document.createElement('div');
                     deleteLink = document.createElement('a');
+                    formaElement = document.createElement('form');
+                    formaElementInput = document.createElement('input');
+                    formaElementInput.classList.add('form-control', 'editContent');
+                    formaElementInput.setAttribute('hidden', true);
 
                     bodyDiv.classList.add('comment--body');
                     commentDiv.classList.add('comment-holder');
@@ -260,6 +264,40 @@
                     deleteLinkDiv.classList.add('deletelink--holder');
                     deleteLink.innerText = 'Delete';
 
+                    formaElement.classList.add("editCommentForm");
+
+                    formaElement.appendChild(formaElementInput);
+
+                    contentDiv.addEventListener("click", () => {
+                        content.style.display = "none";
+                        formaElementInput.value = content.innerText;
+                        formaElementInput.removeAttribute("hidden");
+                    })
+
+                    formaElement.addEventListener('submit', (e) => {
+                        e.preventDefault();
+
+                        axios.post('editComment.php', {
+                            comment_id: data.data,
+                            content: formaElementInput.value,
+                            user_id: <?=$_SESSION['user_id']?>
+                        })
+                        .then(data => {
+                            const statusCode = data.headers['x-status-code'];
+
+                            if (statusCode === '200') {
+                                content.innerText = formaElementInput.value;
+                                content.style.display = "block";
+                                formaElementInput.hidden = true;
+                            } else {
+                                formaElementInput.setAttribute("hidden", true);
+                                content.style.display = "block";
+                                formaElementInput.value = content.innerText;
+                            }
+
+                        })
+                    });
+
                     deleteLink.addEventListener("click", (e) => {
                         axios.post(`deleteItems.php?comment_id=${data.data}`,)
                             .then(data => {
@@ -273,6 +311,7 @@
 
                     contentDiv.appendChild(link);
                     contentDiv.appendChild(content);
+                    contentDiv.appendChild(formaElement);
                     bodyDiv.appendChild(contentDiv);
 
                     deleteLinkDiv.appendChild(deleteLink);
@@ -284,7 +323,7 @@
                     comment[i].parentNode.querySelector(".comments").appendChild(commentDiv);
 
                     nr.innerText = parseInt(nr.innerText) + 1;
-                }).catch(error => console.log('error'));
+                }).catch(error => console.log(error));
 
             commentInput.value = '';
         });

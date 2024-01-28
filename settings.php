@@ -56,7 +56,7 @@ if ($_POST) {
 
     <div class="settings--input" style="margin-top: 30px;">
         <label for="inputPassword" class="form-label">Old Password</label>
-        <input type="text" id="inputPassword" class="" name="opassword">
+        <input type="password" id="inputPassword" class="" name="opassword">
     </div>
     <div class="settings--input" style="margin-top: 20px;">
         <label for="inputPassword1" class="form-label">New Password</label>

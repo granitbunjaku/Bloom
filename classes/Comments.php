@@ -19,7 +19,7 @@ class Comments
         $commentId = $data['comment_id'];
         $uid = $data['user_id'];
 
-        if($uid === $_SESSION['user_id']) {
+        if($uid == $_SESSION['user_id']) {
             if(!strlen(trim($content)) <= 0) {
                 if($this->crud->update("comments", ['content' => $content], ['column' => 'id', 'value' => $commentId])) {
                     header('X-Status-Code: 200');
