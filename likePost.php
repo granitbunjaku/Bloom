@@ -2,6 +2,10 @@
 
 session_start();
 
+if(!isset($_SESSION['is_loggedin']) || !isset($_GET['id'])) {
+    header('Location: login.php');
+}
+
 include('classes/Posts.php');
 
 $crud = new CRUD();

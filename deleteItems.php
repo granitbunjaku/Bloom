@@ -3,6 +3,11 @@
 include 'classes/CRUD.php';
 $crud = new CRUD;
 
+if(!isset($_SESSION['is_loggedin']) || !isset($_GET['post_id']) && !isset($_GET['comment_id'])) {
+    header('Location: login.php');
+}
+
+
 $request_body = file_get_contents('php://input');
 $data = json_decode($request_body, true);
 
